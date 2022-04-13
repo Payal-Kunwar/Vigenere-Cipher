@@ -10,52 +10,98 @@
     <title>Vigenere Cipher</title>
 
     <style>
+        body{
+            background: url('https://static.vecteezy.com/system/resources/previews/002/145/864/large_2x/gradient-abstract-white-polygon-background-vector.jpg');
+        }
+
         .form {
+            background-color: #525252;
             margin: 10% 15%;
+            width: 50%;
             box-sizing: border-box;
             padding: 2rem;
             border-radius: 1rem;
-            background-color: hsl(0, 0%, 100%);
             border: 4px solid hsl(0, 0%, 90%);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-}
+            opacity: 0.95;
+            margin-top: 5%;
+            box-shadow: 1px 1px 1px 1px gray;
+        }
 
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
+        .form-field{
+            width: 560px;
+            height: 125px;
+            background-color: #edede8;
+        }
+
+        div {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+
+        .btn{
+            background: #36055e;
+            color: white;
+            height: 40px;
+            width: 300px;
+            box-shadow: 0.5px 0.5px 0.5px #165436;
+        }
+
+        .btn:hover{
+            background-color: #240340;
+            color: white;
+            height: 40.1px;
+            width: 301px;
+            box-shadow: 0.5px 0.5px 0.5px #666666;
+        }
+
+        .inp{
+            width: 500px;
+            height: 40px;
+        }
+
+        #title{
+            margin-top: 65px;
+            text-shadow: 1px 1px 1px gray;
+            color: black;
+        }
     </style>
 </head>
 <body><center>
-    <h1>Vigenere Cipher</h1>
-    <hr>
+    <h1 id="title"><u>VIGENERE CIPHER</u></h1>
 </center>
+<center>
 <form>
     <div class="form">
         <div class="form-field">
-        <input type="text" placeholder="Enter Text" id="msg">
+        <h4>Enter text</h4>
+        <input class="inp" type="text" placeholder="Enter Text" id="msg">
         </div><br>
 
         <div class="form-field">
-        <input type="text" placeholder="Enter Key" id="key">
+        <h4>Enter key</h4>
+        <input class="inp" type="text" placeholder="Enter Key" id="key">
         </div><br>
 
         <div class="form-field">
-        <input type="button" onclick="encrypt()" value="Encrypt">
+        <h4>Encrypted text</h4>
+        <input type="button" onclick="encrypt()" value="CLICK HERE TO ENCRYPT THE TEXT" class="btn">
         </div><br>
 
         <div class="form-field">
-        <input type="button" onclick="decrypt()" value="decrypt">
+        <h4>Decrypted text</h4>    
+        <input type="button" onclick="decrypt()" value="CLICK HERE TO DECRYPT THE TEXT" class="btn">
         </div><br>
 
-        <div class="form-filed">
+        <div class="form-field">
+        <h4><u>Result</u></h4>
         <p id="output"></p>
         </div>
 </div>
-</form>
+</form></center>
 </body>
 </html>
 <script>
@@ -156,6 +202,5 @@ function decrypt() {
     }
     document.getElementById("output").innerHTML=decrypted;
 }
-
 
 </script>
