@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Vigenere Cipher</title>
+
+    <style>
+        .form {
+            margin: 10% 15%;
+            box-sizing: border-box;
+            padding: 2rem;
+            border-radius: 1rem;
+            background-color: hsl(0, 0%, 100%);
+            border: 4px solid hsl(0, 0%, 90%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+    </style>
+</head>
+<body><center>
+    <h1>Vigenere Cipher</h1>
+    <hr>
+</center>
+<form>
+    <div class="form">
+        <div class="form-field">
+        <input type="text" placeholder="Enter Text" id="msg">
+        </div><br>
+
+        <div class="form-field">
+        <input type="text" placeholder="Enter Key" id="key">
+        </div><br>
+
+        <div class="form-field">
+        <input type="button" onclick="encrypt()" value="Encrypt">
+        </div><br>
+
+        <div class="form-field">
+        <input type="button" onclick="decrypt()" value="decrypt">
+        </div><br>
+
+        <div class="form-filed">
+        <p id="output"></p>
+        </div>
+</div>
+</form>
+</body>
+</html>
+<script>
+
+function isUpperCase(letter) {
+    var l = letter.charCodeAt();
+    if(l > 64 && l < 91) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isLowerCase(letter) {
+    let l = letter.charCodeAt();
+    if(l > 96 && l < 123) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isLetter(letter) {
+    if(isLowerCase(letter) || isUpperCase(letter)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function mod(n, m) {
+    return ((n % m ) + m) % m;
+}
+
+function encrypt() {
+    let encrypted = "";
+    plaintext = document.getElementById("msg").value;
+    key = document.getElementById("key").value;
+    let j = 0;
+    for (let i = 0; i < plaintext.length; i++) {
+        let currentLetter = plaintext[i];
+        const A = 65;
+        const a = 97;
+
+        if(isUpperCase(currentLetter)) {
+            let Pi = (currentLetter.charCodeAt(0) - A);
+            let Ki = (key[j % key.length].toUpperCase().charCodeAt() - A);
+            let upperLetter = mod(Pi + Ki, 26);
+
+            encrypted += String.fromCharCode(upperLetter + A);
+
+            j++;
+        } else if(isLowerCase(currentLetter)) {
+            let Pi = (currentLetter.charCodeAt() - a);
+            let Ki = (key[j % key.length].toLowerCase().charCodeAt() - a);
+            let lowerLetter = mod(Pi + Ki, 26);
+
+            encrypted += String.fromCharCode(lowerLetter + a);
+
+            j++;
+        } else  {
+            encrypted += currentLetter;
+        }
+    }
+    document.getElementById("output").innerHTML=encrypted;
+}
+
+function decrypt() {    
+    let decrypted = "";
+    let enc = document.getElementById("msg").value;
+    let key = document.getElementById("key").value;
+
+    let j = 0;
+    for (let i = 0; i < enc.length; i++) {
+        let currentLetter = enc[i];
+        const A = 65;
+        const a = 97;
+
+        if(isUpperCase(currentLetter)) {
+            let Ci = (currentLetter.charCodeAt(0) - A);
+            let Ki = (key[j % key.length].toUpperCase()).charCodeAt() - A;
+            let upperLetter = mod(Ci - Ki, 26);
+
+            decrypted += String.fromCharCode(upperLetter + A);
+
+            j++;
+        } else if(isLowerCase(currentLetter)) {
+            let Ci = (currentLetter.charCodeAt(0) - a);
+            let Ki = (key[j % key.length].toLowerCase()).charCodeAt() - a;
+            let lowerLetter = mod(Ci - Ki, 26);
+
+            decrypted += String.fromCharCode(lowerLetter + a);
+
+            j++;
+        } else {
+            decrypted += currentLetter;
+        }
+    }
+    document.getElementById("output").innerHTML=decrypted;
+}
+
+
+</script>
