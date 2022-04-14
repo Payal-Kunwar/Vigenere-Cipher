@@ -144,6 +144,15 @@ function encrypt() {
     let encrypted = "";
     plaintext = document.getElementById("msg").value;
     key = document.getElementById("key").value;
+    if (plaintext=="" && key==""){
+        return alert("Please enter the input")
+    }
+    else if(plaintext==""){
+        return alert("Please Enter Message");
+       }
+    else if(key==""){
+        return alert("Please Enter Key");
+    }
     let j = 0;
     for (let i = 0; i < plaintext.length; i++) {
         let currentLetter = plaintext[i];
@@ -177,6 +186,15 @@ function decrypt() {
     let decrypted = "";
     let enc = document.getElementById("msg").value;
     let key = document.getElementById("key").value;
+    if (enc=="" && key==""){
+        return alert("Please enter the input")
+    }
+    else if(enc==""){
+        return alert("Please Enter Message");
+       }
+    else if(key==""){
+        return alert("Please Enter Key");
+    }
 
     let j = 0;
     for (let i = 0; i < enc.length; i++) {
